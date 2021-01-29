@@ -12,6 +12,8 @@ func NotFound(w http.ResponseWriter, r *http.Request) {
 		start    = time.Now()
 	)
 
+	w.Header().Set("Content-Type", "application/json")
+
 	response.ServerProcessTime = time.Since(start).String()
 	response.StatusCode = http.StatusNotFound
 	response.Status = http.StatusText(http.StatusNotFound)

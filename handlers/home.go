@@ -19,5 +19,7 @@ func Home(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	response.Status = http.StatusText(http.StatusOK)
 	response.Data = "Hello :)"
 
+	w.Header().Set("Content-Type", "application/json")
+
 	json.NewEncoder(w).Encode(response)
 }

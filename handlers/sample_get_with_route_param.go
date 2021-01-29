@@ -2,19 +2,23 @@ package handlers
 
 import (
 	"encoding/json"
+	"errors"
+	"log"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/chaidiryahya/go-simple-api/services"
 	"github.com/julienschmidt/httprouter"
 )
 
-func SampleGet(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+func SampleGetWithRouteParam(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	var (
 		err      error
 		data     interface{}
 		response APIResponse
 		start    = time.Now()
+		userID   int64
 	)
 
 	defer func() {
@@ -34,6 +38,17 @@ func SampleGet(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		json.NewEncoder(w).Encode(response)
 	}()
 
-	data, err = services.SampleGet()
+	userIDparam := ps.ByName("user_id")
+	if userIDparam == "" {
+		err = errors.New("UserID cannot empty")
+		return
+	}
+
+	if userID, err = strconv.ParseInt(userIDparam, 10, 64); err != nil {
+		log.Println("UserID must be a number")
+		return
+	}
+
+	data, err = services.SampleGetWithRouteParam(userID)
 
 }

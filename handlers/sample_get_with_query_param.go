@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"errors"
 	"log"
 	"net/http"
 	"strconv"
@@ -12,13 +11,13 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-func SampleGetWithRouteParam(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+func SampleGetWithQueryParam(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	var (
 		err      error
 		data     interface{}
 		response APIResponse
 		start    = time.Now()
-		userID   int64
+		UserID   int64
 	)
 
 	defer func() {
@@ -35,17 +34,15 @@ func SampleGetWithRouteParam(w http.ResponseWriter, r *http.Request, ps httprout
 		utils.WriteJsonResponse(w, response, http.StatusOK)
 	}()
 
-	userIDparam := ps.ByName("user_id")
-	if userIDparam == "" {
-		err = errors.New("UserID cannot empty")
-		return
-	}
+	queryParam := r.URL.Query()
 
-	if userID, err = strconv.ParseInt(userIDparam, 10, 64); err != nil {
+	userID := queryParam.Get("user_id")
+
+	if UserID, err = strconv.ParseInt(userID, 10, 64); err != nil {
 		log.Println("UserID must be a number")
 		return
 	}
 
-	data, err = services.SampleGetWithRouteAndQueryParam(userID)
+	data, err = services.SampleGetWithRouteAndQueryParam(UserID)
 
 }

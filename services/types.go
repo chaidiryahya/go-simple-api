@@ -6,3 +6,8 @@ type SampleGetResponse struct {
 	Age         string `json:"age"`
 	PhoneNumber string `json:"phoneNumber"`
 }
+
+type SamplePostWithJsonBodyParam struct {
+	YourName string `json:"yourName"`
+	UserID   int64  `json:"userID"`
+}

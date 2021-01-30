@@ -30,7 +30,7 @@ func initRouter() http.Handler {
 	router.GET("/get", handlers.SampleGet)
 	router.GET("/get_with_route_param/:user_id", handlers.SampleGetWithRouteParam)
 	router.GET("/get_with_query_param", handlers.SampleGetWithQueryParam)
-	// router.POST("/post_with_json_body", handlers.SampleGet)
+	router.POST("/post_with_json_body", handlers.SamplePostwithJsonBody)
 
 	log.Println("Router : ready")
 	return router

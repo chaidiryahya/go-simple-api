@@ -1,9 +1,10 @@
 package handlers
 
 import (
-	"encoding/json"
 	"net/http"
 	"time"
+
+	"github.com/chaidiryahya/go-simple-api/utils"
 )
 
 func NotFound(w http.ResponseWriter, r *http.Request) {
@@ -12,12 +13,9 @@ func NotFound(w http.ResponseWriter, r *http.Request) {
 		start    = time.Now()
 	)
 
-	w.Header().Set("Content-Type", "application/json")
-
 	response.ServerProcessTime = time.Since(start).String()
-	response.StatusCode = http.StatusNotFound
 	response.Status = http.StatusText(http.StatusNotFound)
 	response.MessageError = "Endpoint not found :)"
 
-	json.NewEncoder(w).Encode(response)
+	utils.WriteJsonResponse(w, response, http.StatusNotFound)
 }

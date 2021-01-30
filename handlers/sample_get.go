@@ -1,11 +1,11 @@
 package handlers
 
 import (
-	"encoding/json"
 	"net/http"
 	"time"
 
 	"github.com/chaidiryahya/go-simple-api/services"
+	"github.com/chaidiryahya/go-simple-api/utils"
 	"github.com/julienschmidt/httprouter"
 )
 
@@ -19,19 +19,17 @@ func SampleGet(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	defer func() {
 
+		response.ServerProcessTime = time.Since(start).String()
+		response.Status = http.StatusText(http.StatusOK)
+
 		if err != nil {
 			response.MessageError = err.Error()
 		} else {
 			response.Data = data
 		}
 
-		w.Header().Set("Content-Type", "application/json")
+		utils.WriteJsonResponse(w, response, http.StatusOK)
 
-		response.ServerProcessTime = time.Since(start).String()
-		response.StatusCode = http.StatusOK
-		response.Status = http.StatusText(http.StatusOK)
-
-		json.NewEncoder(w).Encode(response)
 	}()
 
 	data, err = services.SampleGet()

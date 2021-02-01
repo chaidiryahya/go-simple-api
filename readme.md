@@ -31,7 +31,10 @@
  
  ![Hit with postman](https://i.ibb.co/7VbB443/Screenshot-from-2021-02-01-10-13-54.png)
 
- Sample userID : 100 and 200
+ Sample userID : 100 and 101
  
  Please refer to this [doc](https://golang.org/doc/) for GoLang documentation :)
+
+ ### Others
+ I have added sample unit test. Will update for another sample
  

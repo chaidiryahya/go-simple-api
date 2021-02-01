@@ -19,12 +19,17 @@
  You can use your own browser for get request and i suggest use POSTMAN for post request. 
  
  Sample curl for post request :
+ 
  `curl --location --request POST 'http://localhost:8080/post_with_json_body' \
 --header 'Content-Type: text/plain' \
 --data-raw '{
 	"yourName" : "Chaidir Yahya",
 	"userID" : 12345
 }'`
+
+ postman :
+ 
+ ![Hit with postman](https://i.ibb.co/7VbB443/Screenshot-from-2021-02-01-10-13-54.png)
 
  Sample userID : 100 and 200
  

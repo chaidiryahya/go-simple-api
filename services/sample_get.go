@@ -1,6 +1,8 @@
 package services
 
-func SampleGet() (interface{}, error) {
+var SampleGet = sampleGet
+
+func sampleGet() (interface{}, error) {
 	var (
 		resp []SampleGetResponse
 	)

@@ -2,7 +2,9 @@ package services
 
 import "errors"
 
-func SampleGetWithRouteAndQueryParam(UserID int64) (interface{}, error) {
+var SampleGetWithRouteAndQueryParam = sampleGetWithRouteAndQueryParam
+
+func sampleGetWithRouteAndQueryParam(UserID int64) (interface{}, error) {
 
 	var (
 		err  error
